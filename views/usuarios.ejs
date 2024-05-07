@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+</head>
+<body>
+    <h1>Usuarios</h1>
+    
+    <a href="/usuarios/nuevo" class="btn btn-primary">Crear Usuario</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% usuarios.forEach(function(usuario) { %>
+                <tr>
+                    <td><%= usuario.id %></td>
+                    <td><%= usuario.nombre %></td>
+                    <td><%= usuario.correo %></td>
+                    <td>
+                        <a href="/usuarios/<%= usuario.id %>/editar" class="btn btn-warning">Editar</a>
+                        <!-- Formulario para eliminar un usuario -->
+                        <form action="/usuarios/<%= usuario.id %>/eliminar" method="POST">
+                            <input type="hidden" name="_method" value="DELETE"> <!-- Agrega un campo oculto para indicar que es una solicitud DELETE -->
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
