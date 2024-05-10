@@ -5,22 +5,16 @@ exports.getAllUsuarios = (callback) => {
 };
 
 exports.getUsuarioById = (id, callback) => {
-  db.query('SELECT * FROM usuarios WHERE id = ?', [id], (err, usuarios) => {
+  const query = 'SELECT * FROM usuarios WHERE id = ?';
+  db.query(query, [id], (err, results) => {
     if (err) {
-      console.error('Error al ejecutar la consulta:', err);
       callback(err, null);
     } else {
-      if (usuarios.length > 0) {
-        const usuario = usuarios[0]; // Obtén el primer usuario del array
-        console.log('Usuario encontrado en la base de datos:', usuario);
-        callback(null, usuario); // Devuelve solo el usuario encontrado
-      } else {
-        console.log('Usuario no encontrado en la base de datos');
-        callback(null, null); // Devuelve null si no se encuentra ningún usuario
-      }
+      callback(null, results[0]); // Asume que `results[0]` es el usuario buscado
     }
   });
 };
+
 
 
 

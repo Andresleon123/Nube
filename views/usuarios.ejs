@@ -4,39 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h1>Usuarios</h1>
-    
-    <a href="/usuarios/nuevo" class="btn btn-primary">Crear Usuario</a>
+    <div class="container mt-3">
+        <h1>Crud Node</h1>
+        <a href="/usuarios/nuevo" class="btn btn-primary mb-3">Crear Usuario</a>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% usuarios.forEach(function(usuario) { %>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
                 <tr>
-                    <td><%= usuario.id %></td>
-                    <td><%= usuario.nombre %></td>
-                    <td><%= usuario.correo %></td>
-                    <td>
-                        <a href="/usuarios/<%= usuario.id %>/editar" class="btn btn-warning">Editar</a>
-                        <!-- Formulario para eliminar un usuario -->
-                        <form action="/usuarios/<%= usuario.id %>/eliminar" method="POST">
-                            <input type="hidden" name="_method" value="DELETE"> <!-- Agrega un campo oculto para indicar que es una solicitud DELETE -->
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
-
-                    </td>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
                 </tr>
-            <% }); %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% usuarios.forEach(function(usuario) { %>
+                    <tr>
+                        <td><%= usuario.id %></td>
+                        <td><%= usuario.nombre %></td>
+                        <td><%= usuario.correo %></td>
+                        <td>
+                            <a href="/usuarios/<%= usuario.id %>/editar" class="btn btn-success">Editar</a>
+                            <form action="/usuarios/delete/<%= usuario.id %>" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
